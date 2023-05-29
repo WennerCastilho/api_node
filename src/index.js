@@ -6,3 +6,7 @@ const server = http.createServer((request, response) => {
   response.end(JSON.stringify({ 'message': 'Success' }))
 })
 
+server.listen(3000, () => {
+  console.clear()
+  console.log("🔥 -> Server started on http://localhost:3000")
+})
