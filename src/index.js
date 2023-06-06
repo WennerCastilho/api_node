@@ -1,12 +1,14 @@
 const http = require('http')
-const SingerController = require('./controllers/SingerController')
 const NotFoundController = require('./controllers/NotFoundController')
+const routes = require('./routes')
 
 const server = http.createServer((request, response) => {
   console.log(`Request method: ${request.method} | Endpoint: ${request.url}`)
 
-  if (request.url === '/singers' && request.method === 'GET') {
-    SingerController.listSingers(request, response)
+  const route = routes.find((routeObj) => routeObj.endpoint === request.url && routeObj.method === request.method)
+
+  if (route) {
+    route.handler(request, response)
   } else {
     NotFoundController(request, response)
   }
