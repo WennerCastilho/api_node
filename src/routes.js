@@ -7,8 +7,8 @@ module.exports = [
     handler: SingerController.listSingers,
   },
   {
-    endpoint: '/singers',
-    method: 'POST',
-    handler: SingerController.listSingers,
+    endpoint: '/singers/:id',
+    method: 'GET',
+    handler: SingerController.getSingersById,
   }
 ]

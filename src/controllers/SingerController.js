@@ -11,5 +11,18 @@ module.exports = {
     })
     response.writeHead(200, { 'Content-Type': 'application/json' })
     response.end(JSON.stringify(sortedSingers))
+  },
+  getSingersById(request, response) {
+    const { id } = request.params
+
+    const singer = singers.find(({ id: singerId }) => singerId === Number(id))
+    
+    if (singer) {
+      response.writeHead(200, { 'Content-Type': 'application/json' })
+      response.end(JSON.stringify(singer))
+    } else {
+      response.writeHead(400, { 'Content-Type': 'application/json' })
+      response.end(JSON.stringify({ error: 'User not found' }))
+    }
   }
 }
