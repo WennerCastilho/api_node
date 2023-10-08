@@ -9,7 +9,15 @@ module.exports = {
       }
       return a.id > b.id ? 1 : -1
     })
-    response.writeHead(200, { 'Content-Type': 'application/json' });
-    response.end(JSON.stringify({ users: sortedUsers }))
+    response.send(200, { users: sortedUsers })
   },
-}
+  getUserById(request, response) {
+    const { id } = request.param
+    const user = users.find((userObj) => userObj.id === Number(id))
+
+    if (user) {
+      return response.send(200, { user })
+    }
+      response.send(400, { error: "User not found" })
+    },
+  }
