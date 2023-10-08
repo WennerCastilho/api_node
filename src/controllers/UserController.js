@@ -55,5 +55,15 @@ module.exports = {
       })
 
       response.send(200, userExists)
+  },
+  deleteUser(request, response) {
+    const { id } = request.param
+    const userExists = users.find((user) => user.id === Number(id))
+    if(!userExists) {
+      response.send(400, { error: 'User not found' })
+    }
+
+    users = users.filter((user) => user.id !== Number(id))
+    response.send(200, userExists)
   }
 }
